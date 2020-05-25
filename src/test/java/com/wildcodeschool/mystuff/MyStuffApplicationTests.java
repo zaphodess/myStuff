@@ -1,4 +1,4 @@
-package com.wildcodeschool.myStuff.mme;
+package com.wildcodeschool.mystuff;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

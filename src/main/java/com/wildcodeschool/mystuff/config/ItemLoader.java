@@ -1,4 +1,4 @@
-package com.wildcodeschool.myStuff.mme.config;
+package com.wildcodeschool.mystuff.config;
 
 
 
@@ -10,8 +10,8 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
-import com.wildcodeschool.myStuff.mme.entities.Item;
-import com.wildcodeschool.myStuff.mme.repositories.ItemRepository;
+import com.wildcodeschool.mystuff.entities.Item;
+import com.wildcodeschool.mystuff.repositories.ItemRepository;
 
 
 @Component
@@ -24,7 +24,7 @@ public class ItemLoader implements ApplicationListener<ContextRefreshedEvent>{
 	        this.itemRepository = itemRepository;
 	    }
 	    @Override
-	    @DateTimeFormat (pattern="yyyy-MM-dd")
+	    
 	    public void onApplicationEvent(ContextRefreshedEvent event) {
 	        
 	    	Item topf = new Item();

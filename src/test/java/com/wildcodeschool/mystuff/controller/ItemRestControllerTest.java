@@ -1,9 +1,10 @@
-package com.wildcodeschool.myStuff.mme.controller;
+package com.wildcodeschool.mystuff.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.net.URISyntaxException;
 import java.sql.Date;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,8 +15,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.wildcodeschool.myStuff.mme.entities.Item;
-import com.wildcodeschool.myStuff.mme.repositories.ItemRepository;
+import com.wildcodeschool.mystuff.entities.Item;
+import com.wildcodeschool.mystuff.repositories.ItemRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class ItemRestControllerTest {
@@ -28,10 +29,11 @@ public class ItemRestControllerTest {
 	@Autowired
 	private ItemRepository repo;
 
+
 	@BeforeEach
 	void setupRepo() {
 		repo.deleteAll();
-	}
+		}
 
 	@Test
 	void shouldBeAbleToUploadAnItem() {
@@ -39,21 +41,37 @@ public class ItemRestControllerTest {
 //      Given / Arrange
         Item lawnMower = buildLawnMower();   
 //      When / Act
-        ResponseEntity<Item> response = restTemplate.postForEntity(BASE_PATH, lawnMower, Item.class);
+        ResponseEntity<Item> response = restTemplate.postForEntity(BASE_PATH + "/", lawnMower, Item.class);
   //    Then / Assert
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(response.getBody().getId()).isNotNull();
-    //    assertThat(response.getBody()).isEqualToComparingFieldByField(lawnMower);
+        assertThat(response.getBody()).isEqualToComparingOnlyGivenFields(lawnMower, "name","description","amount","location");
 	}
 	
-	@Test
-	void shouldReadAllItems() {
-
-	}
+//	@Test
+//	void shouldReadAllItems() {
+//		// Given / Arrange
+//		Item lawnMower = buildLawnMower();
+//		Item lawnTrimmer = buildLawnTrimmer();
+//		this.repo.save(lawnMower);
+//		this.repo.save(lawnTrimmer);
+//		//When / Act
+//		ResponseEntity<Item> response = restTemplate.postForEntity(BASE_PATH, this.repo, Item.class);
+//				
+//		//Then / Assert
+//		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+//
+//	}
 
 	@Test
 	void shouldFindOneItem() {
-		fail();
+		// Given / Arrange
+		Item lawnMower = givenAnInsertedItem().getBody();
+		// When / Act
+		ResponseEntity<Item> response = restTemplate.getForEntity(BASE_PATH + lawnMower.getId(), Item.class);
+		// Then / Assert
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getBody()).isEqualToComparingFieldByField(lawnMower);	
 	}
 
 	@Test
@@ -91,26 +109,16 @@ public class ItemRestControllerTest {
 	}
 	
 
-	
 	private Item buildLawnMower() {
-		Item item1 = new Item();
-        item1.setDescription("Description LawnMower");
-        item1.setName("Lawn Mower");
-        item1.setLastUsed(Date.valueOf("2019-05-01"));
-        item1.setAmount(1);
-        item1.setLocation("Basement");
-        return item1;
-	}
-	
-	private Item buildLawnTrimmer() {
-		Item item2 = new Item ();
-        item2.setDescription("Description LawnTrimmer");
-        item2.setName("Lawn Trimmer");
-        item2.setLastUsed(Date.valueOf("2020-02-02"));
-        item2.setAmount(1);
-        item2.setLocation("Basement");
-        return item2;
-       	
+		Item item = Item.builder().name("Lawn mower").amount(1).lastUsed(Date.valueOf("2019-05-01"))
+				.location("Basement").build();
+		return item;
 	}
 
+	private Item buildLawnTrimmer() {
+		Item item = Item.builder().name("Lawn trimmer").amount(1).lastUsed(Date.valueOf("2018-05-01"))
+				.location("Basement").build();
+		return item;
+	}
+	
 }

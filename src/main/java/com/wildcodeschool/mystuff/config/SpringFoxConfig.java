@@ -1,4 +1,4 @@
-package com.wildcodeschool.myStuff.mme.config;
+package com.wildcodeschool.mystuff.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
