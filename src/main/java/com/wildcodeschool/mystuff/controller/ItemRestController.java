@@ -28,12 +28,12 @@ import com.wildcodeschool.mystuff.repositories.ItemRepository;
 
 @RestController
 @RequestMapping("/api/v1/items")
-public class ItemController {
+public class ItemRestController {
 	
 	private final ItemRepository itemRepo;
 	
 	@Autowired
-	public ItemController (ItemRepository itemRepo) {
+	public ItemRestController (ItemRepository itemRepo) {
 		this.itemRepo = itemRepo;	
 	}
 	
