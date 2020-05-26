@@ -3,6 +3,8 @@ package com.wildcodeschool.mystuff.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,8 +43,8 @@ public class ItemController {
 	}
 	
 	@GetMapping("/{id}")
-	public Optional<Item> getItemById(@RequestParam Long Id) {
-		return this.itemRepo.findById(Id);
+	public Item getItemById(@PathVariable Long id) {
+		return this.itemRepo.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
 	}
 	
 	@PostMapping

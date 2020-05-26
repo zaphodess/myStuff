@@ -2,12 +2,11 @@ package com.wildcodeschool.mystuff.config;
 
 
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import com.wildcodeschool.mystuff.entities.Item;
@@ -30,7 +29,7 @@ public class ItemLoader implements ApplicationListener<ContextRefreshedEvent>{
 	    	Item topf = new Item();
 	        topf.setDescription("Haushaltsgegenstand");
 	        topf.setName("Topf");
-	        topf.setLastUsed(Date.valueOf("2020-02-02"));
+	        topf.setLastUsed(LocalDate.of(2020,02,02));
 	        topf.setAmount(3);
 	        topf.setLocation("Küche");
 	        itemRepository.save(topf);
@@ -38,7 +37,7 @@ public class ItemLoader implements ApplicationListener<ContextRefreshedEvent>{
 	        Item tisch = new Item();
 	        tisch.setDescription("Möbel");
 	        tisch.setName("Tisch");
-	        tisch.setLastUsed(Date.valueOf("2020-03-03"));
+	        tisch.setLastUsed(LocalDate.of(2020,02,02));
 	        tisch.setAmount(1);
 	        tisch.setLocation("Wohnzimmer");
 	        itemRepository.save(tisch);

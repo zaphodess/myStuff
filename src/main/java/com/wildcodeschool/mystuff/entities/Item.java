@@ -1,6 +1,7 @@
 package com.wildcodeschool.mystuff.entities;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,6 +34,6 @@ public class Item {
 	private String description;
 	@DateTimeFormat (pattern="yyyy-MM-dd")
 	//@Temporal(TemporalType.DATE)
-	private Date lastUsed;
+	private LocalDate lastUsed;
 	
 }
