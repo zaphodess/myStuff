@@ -50,6 +50,8 @@ public class ItemRestControllerTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(response.getBody().getId()).isNotNull();
         assertThat(response.getBody()).isEqualToComparingOnlyGivenFields(lawnMower, "name","description","amount","location");
+        lawnMower.setId(response.getBody().getId());
+        assertThat(response.getBody()).isEqualToComparingFieldByField(lawnMower);
 	}
 	
 	@Test
@@ -62,7 +64,7 @@ public class ItemRestControllerTest {
 				
 		//Then / Assert
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(response.getBody().length).isEqualTo(2);
+		assertThat(response.getBody().length == 2);
 		assertThat(response.getBody()[0]).isEqualToComparingFieldByField(lawnMower);
 		assertThat(response.getBody()[1]).isEqualToComparingFieldByField(lawnTrimmer);
 
