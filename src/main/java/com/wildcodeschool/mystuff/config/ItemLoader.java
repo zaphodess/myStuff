@@ -26,21 +26,30 @@ public class ItemLoader implements ApplicationListener<ContextRefreshedEvent>{
 	    
 	    public void onApplicationEvent(ContextRefreshedEvent event) {
 	        
-	    	Item topf = new Item();
-	        topf.setDescription("Haushaltsgegenstand");
-	        topf.setName("Topf");
-	        topf.setLastUsed(LocalDate.of(2020,02,02));
-	        topf.setAmount(3);
-	        topf.setLocation("Küche");
-	        itemRepository.save(topf);
-	        
-	        Item tisch = new Item();
-	        tisch.setDescription("Möbel");
-	        tisch.setName("Tisch");
-	        tisch.setLastUsed(LocalDate.of(2020,02,02));
-	        tisch.setAmount(1);
-	        tisch.setLocation("Wohnzimmer");
-	        itemRepository.save(tisch);
+	    	for (int i = 0; i < 20; i++) {
+	    		
+	    		Item topf = new Item();
+		        topf.setDescription("Haushaltsgegenstand");
+		        topf.setName("Topf");
+		        topf.setLastUsed(LocalDate.of(2020,02,02));
+		        topf.setAmount(3);
+		        topf.setLocation("Küche");
+		        itemRepository.save(topf);
+		        
+		        Item tisch = new Item();
+		        tisch.setDescription("Möbel");
+		        tisch.setName("Tisch");
+		        tisch.setLastUsed(LocalDate.of(2020,02,02));
+		        tisch.setAmount(1);
+		        tisch.setLocation("Wohnzimmer");
+		        itemRepository.save(tisch);
+		        
+				
+				//Das geht nicht, weil ich keinen speziellen Konstruktor gebaut habe. Die Reihenfolge stimmt nicht
+		        //Item item1 = new Item("Computer", 2, "2020-05-22", "Büro", "Diesen Computer benutze ich im HomeOffice.");
+		        //itemRepository.save(item1);
+			}
+	    	
 	     
 	    }
 
